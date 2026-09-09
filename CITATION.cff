@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: >-
+  If you use DERA, cite this software, the associated paper when available,
+  and the upstream methods and dataset listed in the documentation.
+title: DERA
+type: software
+version: 0.1.0
+authors:
+  - name: DERA contributors
+license: Apache-2.0
+keywords:
+  - X-ray object detection
+  - edge-aware detection
+  - Grounding DINO
+  - PiDiNet
+

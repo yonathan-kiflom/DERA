@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Environments and editors
+.venv/
+venv/
+.env
+.idea/
+.vscode/
+*.swp
+
+# Runtime output
+/runs/
+/work_dirs/
+/outputs/
+wandb/
+*.log
+
+# Datasets and weights
+/data/
+/checkpoints/*
+!/checkpoints/manifest.json
+/pretrained/
+*.pth
+*.pth.tar
+*.pt
+*.ckpt
+*.safetensors
+*.bin
+*.onnx
+
+# OS
+.DS_Store
+Thumbs.db

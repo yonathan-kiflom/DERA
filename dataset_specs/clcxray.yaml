@@ -1,0 +1,29 @@
+name: CLCXray
+homepage: https://github.com/GreysonPhoenix/CLCXray
+classes:
+  - blade
+  - scissors
+  - knife
+  - dagger
+  - SwissArmyKnife
+  - PlasticBottle
+  - Cans
+  - VacuumCup
+  - GlassBottle
+  - CartonDrinks
+  - Tin
+  - SprayCans
+splits:
+  train:
+    annotation: annotations/instances_train2017_sam2.json
+    mask_annotation: annotations/instances_train2017_sam2.json
+    images: train2017/
+  val:
+    annotation: annotations/instances_val2017.json
+    images: val2017/
+  test:
+    annotation: annotations/instances_test2017.json
+    images: test2017/
+notes:
+  - The SAM2 pseudo-mask annotation is used only for boundary supervision.
+  - Evaluation and inference require boxes, not masks.

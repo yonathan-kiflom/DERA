@@ -1,0 +1,35 @@
+name: STCray
+homepage: https://divs1159.github.io/STING-BEE/
+classes:
+  - Powerbank
+  - Gun
+  - Hammer
+  - Shaving Razor
+  - Screwdriver
+  - Nail Cutter
+  - Syringe
+  - Bullet
+  - Pliers
+  - Scissors
+  - 3D printed gun
+  - Handcuffs
+  - Battery
+  - Knife
+  - Cutter
+  - Other Sharp Item
+  - Blade
+  - Wrench
+  - Explosive
+  - Lighter
+splits:
+  train:
+    annotation: annotations/STCray_train.json
+    mask_annotation: annotations/STCray_train.json
+    images: train/
+  test:
+    annotation: annotations/STCray_test.json
+    images: test/
+notes:
+  - The complete official train split is used for training.
+  - The complete official test split is used for validation and testing.
+  - No train-derived validation split is created.

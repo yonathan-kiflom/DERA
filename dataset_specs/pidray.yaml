@@ -1,0 +1,47 @@
+name: PIDray
+homepage: https://github.com/bywang2018/security-dataset
+classes:
+  - Baton
+  - Pliers
+  - Hammer
+  - Powerbank
+  - scissors
+  - Wrench
+  - gun
+  - Bullet
+  - Sprayer
+  - HandCuffs
+  - knife
+  - Lighter
+splits:
+  train:
+    annotation: annotations/instances_train2017.json
+    mask_annotation: annotations/instances_train2017.json
+    images: train2017/
+  val:
+    annotation: annotations/instances_val2017.json
+    images: val2017/
+  test:
+    annotation: annotations/fulltest.json
+    images: fulltest/
+    # The official full-test JSON capitalizes these names differently from
+    # train/val. IDs and order are unchanged; listing them prevents COCO's
+    # case-sensitive category lookup from dropping classes at evaluation.
+    classes:
+      - Baton
+      - Pliers
+      - Hammer
+      - Powerbank
+      - Scissors
+      - Wrench
+      - Gun
+      - Bullet
+      - Sprayer
+      - HandCuffs
+      - Knife
+      - Lighter
+notes:
+  - Training uses the official training set.
+  - Evaluation uses the combined full test set.
+  - Full-test category-name capitalization follows its official JSON.
+  - The training JSON must include segmentation for boundary learning.

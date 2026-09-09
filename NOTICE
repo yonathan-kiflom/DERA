@@ -1,0 +1,19 @@
+DERA
+Copyright 2026 DERA contributors
+
+Portions derived from MMDetection:
+Copyright 2018-2023 OpenMMLab. All rights reserved.
+
+Portions informed by the BEFUnet reference implementation:
+Copyright (c) 2024 Omid Nejati
+
+PiDiNet-derived portions:
+Copyright (c) 2021 Zhuo Su
+
+DERA builds on interfaces and implementations from MMDetection, Grounding
+DINO, Swin Transformer, BEFUnet, and PiDiNet. Their copyright notices and
+license terms remain the property of their respective authors. See
+THIRD_PARTY_LICENSES.md and third_party/ for source-specific notices.
+
+The Apache License 2.0 in LICENSE applies to DERA-authored material only and
+does not replace or relax any third-party license.

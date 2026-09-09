@@ -1,0 +1,10 @@
+name: dera
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9.20
+  - pip=24.2
+  - setuptools=79.0.1
+  - wheel=0.45.1
+  - pip:
+      - -r environment/requirements-cu121.txt

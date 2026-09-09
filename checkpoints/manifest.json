@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "model": "DERA",
+  "artifacts": [],
+  "required_fields": [
+    "name",
+    "stage",
+    "dataset",
+    "categories",
+    "url",
+    "bytes",
+    "sha256",
+    "dera_version",
+    "source_commit",
+    "config",
+    "config_sha256",
+    "parent_sha256",
+    "annotation_sha256",
+    "contains_training_state"
+  ],
+  "note": "Checkpoint binaries are published as checksum-addressed release assets, never committed to Git."
+}
+
