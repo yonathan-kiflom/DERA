@@ -1,0 +1,404 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#5b34da">
+    <meta name="description" content="DERA learns object-specific X-ray boundaries and injects detached residual corrections for more accurate prohibited-item detection under overlap and clutter.">
+    <meta property="og:title" content="DERA — Detached Edge-Residual Adaptation for Prohibited Item Detection">
+    <meta property="og:description" content="A boundary-guided, parameter-efficient adaptation framework for grounded prohibited-item detection in cluttered X-ray imagery.">
+    <meta property="og:type" content="website">
+    <title>DERA — Detached Edge-Residual Adaptation for Prohibited Item Detection</title>
+    <link rel="icon" type="image/jpeg" href="assets/lab-logo.jpg">
+    <link rel="stylesheet" href="assets/styles.css">
+    <script src="assets/app.js" defer></script>
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="reading-progress" aria-hidden="true"><span id="reading-progress-bar"></span></div>
+
+    <header class="site-header" id="top">
+        <nav class="site-nav shell" aria-label="Primary navigation">
+            <a class="wordmark" href="#top" aria-label="DERA home">
+                <span class="wordmark-main">DERA</span>
+                <span class="wordmark-offset" aria-hidden="true">DERA</span>
+            </a>
+            <div class="nav-links">
+                <a href="#method">Method</a>
+                <a href="#results">Results</a>
+                <a href="#qualitative">Visuals</a>
+                <a href="#limitations">Limitations</a>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="hero section-pad" aria-labelledby="hero-title">
+            <div class="hero-orbit hero-orbit-one" aria-hidden="true"></div>
+            <div class="hero-orbit hero-orbit-two" aria-hidden="true"></div>
+            <div class="shell hero-grid">
+                <div class="hero-copy reveal">
+                    <div class="eyebrow-row">
+                        <span class="status-chip"><span class="status-dot" aria-hidden="true"></span>Under Review</span>
+                        <!-- <span class="paper-type">Research project</span> -->
+                    </div>
+                    <h1 id="hero-title">
+                        <span class="title-acronym">DERA</span>
+                        <span class="title-long">Detached Edge-Residual Adaptation for <em>Prohibited Item Detection</em></span>
+                    </h1>
+                    <p class="hero-deck">DERA learns edge features and injects a small, controlled correction into a grounded detector.</p>
+                    <p class="hero-support">Built for weak texture, severe overlap, and material clutter.</p>
+
+                    <div class="authors" aria-label="Authors">
+                        <a href="https://scholar.google.com/citations?user=1NgtYpwAAAAJ&amp;hl=en" target="_blank" rel="noopener">Yonathan Michael<sup>1</sup></a>
+                        <a href="https://scholar.google.com/citations?user=dLQ1jLkAAAAJ&amp;hl=en" target="_blank" rel="noopener">Mohamad Alansari<sup>1</sup></a>
+                        <a href="https://scholar.google.com/citations?user=ylX5MEAAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">Mohammed Bennamoun<sup>2</sup></a>
+                        <a href="https://scholar.google.com/citations?user=j5K7HPoAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">Dwarikanath Mahapatra<sup>1</sup></a>
+                        <a href="https://scholar.google.com/citations?user=jenl24IAAAAJ&amp;hl=en&amp;oi=ao" target="_blank" rel="noopener">Andreas Henschel<sup>1</sup></a>
+                        <a href="https://scholar.google.com/citations?user=G_2Xpm0AAAAJ&amp;hl=en" target="_blank" rel="noopener">Naoufel Werghi<sup>1</sup></a>
+                    </div>
+                    <div class="affiliations">
+                        <span><sup>1</sup> Khalifa University, Abu Dhabi, United Arab Emirates</span>
+                        <span><sup>2</sup> The University of Western Australia, Perth, Australia</span>
+                    </div>
+
+                    <div class="action-row" aria-label="Project resources">
+                        <span class="resource-pill" aria-disabled="true">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2.75h8l4 4V21.25H6zM14 3v4h4M9 12h6M9 16h6"/></svg>
+                            <span><strong>Paper</strong><small>Coming soon</small></span>
+                        </span>
+                        <a class="resource-pill" href="https://github.com/yonathan-kiflom/DERA" target="_blank" rel="noopener">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9 4 12l4 3M16 9l4 3-4 3M14 5l-4 14"/></svg>
+                            <span><strong>Code</strong><small>GitHub</small></span>
+                        </a>
+                        <span class="resource-pill" aria-disabled="true">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 20h14"/></svg>
+                            <span><strong>Weights</strong><small>Coming soon</small></span>
+                        </span>
+                    </div>
+                </div>
+
+                <figure class="hero-figure reveal reveal-delay">
+                    <div class="offset-frame" aria-hidden="true"></div>
+                    <button class="figure-button" type="button" data-lightbox-src="assets/fig1-motivation.webp" data-lightbox-alt="DERA motivation: baseline, edge-feature, and DERA comparisons for nested small objects and severe occlusion">
+                        <img src="assets/fig1-motivation.webp" width="2800" height="1927" alt="Baseline and DERA comparison showing recovery of nested, occluded prohibited items and tighter localization" fetchpriority="high" decoding="async">
+                        <span class="zoom-label"><span aria-hidden="true">↗</span> Explore figure</span>
+                    </button>
+                </figure>
+            </div>
+
+            <div class="shell hero-metrics reveal" aria-label="Headline improvements over baseline">
+                <article><strong>+3.1</strong><span>AP on PIDray</span><small>72.1 → 75.2</small></article>
+                <article><strong>+1.6</strong><span>AP on CLCXray</span><small>64.0 → 65.6</small></article>
+                <article><strong>+2.4</strong><span>AP on STCray</span><small>9.3 → 11.7</small></article>
+                <p>Improvement over the baseline under matched evaluation settings.</p>
+            </div>
+        </section>
+
+        <section class="abstract-band section-pad" aria-labelledby="abstract-title">
+            <div class="shell abstract-grid">
+                <div class="section-kicker reveal"><span>00</span> In brief</div>
+                <div class="abstract-copy reveal">
+                    <h2 id="abstract-title">Find the boundary that matters.</h2>
+                    <p>Transmission X-rays obscure threats through overlap, weak texture, and material clutter, while generic edges often highlight benign structures. DERA combines a Swin contextual hierarchy with a parallel PiDiNet edge pyramid, then learns an object-specific boundary prior from instance contours available during training.</p>
+                    <p>Detached gating isolates boundary supervision from the foundation detector. Zero-initialized adapters inject detection-guided corrections only at the first two feature levels. At inference, DERA needs only an X-ray image and category prompts.</p>
+                </div>
+                <aside class="abstract-aside reveal">
+                    <span>Core principle</span>
+                    <blockquote>Learn the boundary.<br>Detach the supervision.<br>Inject only the correction.</blockquote>
+                </aside>
+            </div>
+        </section>
+
+        <section class="problem section-pad" id="problem" aria-labelledby="problem-title">
+            <div class="shell">
+                <div class="section-heading reveal">
+                    <div class="section-kicker"><span>01</span> The problem</div>
+                    <h2 id="problem-title">Not every edge is <em>evidence.</em></h2>
+                    <p>Threat contours can be faint or fragmented, while luggage frames, electronics, and benign objects often create stronger boundaries under X-ray imagery.</p>
+                </div>
+                <figure class="problem-figure reveal">
+                    <button class="figure-button clean" type="button" data-lightbox-src="assets/fig3-edge-maps.webp" data-lightbox-alt="Boundary-guided DERA feature maps under heavy overlap and faint boundaries">
+                        <img src="assets/fig3-edge-maps.webp" width="2800" height="1234" alt="Ground-truth detections, reference edge maps, learned DERA edge features, and final detections for heavy overlap and faint boundaries" loading="lazy" decoding="async">
+                    </button>
+                </figure>
+                <p class="problem-close reveal">The challenge is not simply to add edges, but to let selected boundaries improve localization without rewriting the representation that already works.</p>
+            </div>
+        </section>
+
+        <section class="method section-pad" id="method" aria-labelledby="method-title">
+            <div class="shell">
+                <div class="section-heading split-heading reveal">
+                    <div>
+                        <div class="section-kicker"><span>02</span> Core idea</div>
+                        <h2 id="method-title">Understand. Select. <em>Correct.</em></h2>
+                    </div>
+                    <p>Three deliberate operations turn noisy X-ray structure into a controlled, detection-optimized update.</p>
+                </div>
+
+                <ol class="method-steps">
+                    <li class="method-step reveal">
+                        <div class="step-top"><span>01</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M7 24c5-10 12-15 17-15s12 5 17 15c-5 10-12 15-17 15S12 34 7 24Z"/><circle cx="24" cy="24" r="6"/></svg></div>
+                        <h3>Understand the scene</h3>
+                        <p>A hierarchical Swin branch captures context while a parallel PiDiNet pyramid preserves local intensity transitions across four scales.</p>
+                        <small>Context + local structure</small>
+                    </li>
+                    <li class="method-step reveal">
+                        <div class="step-top"><span>02</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M9 10h30v28H9zM16 17c7-6 15-2 17 5 2 8-7 14-15 10-7-4-7-10-2-15Z"/></svg></div>
+                        <h3>Select the boundary</h3>
+                        <p>A lightweight head learns an object-specific prior from the two highest-resolution edge features and training-time inner contours.</p>
+                        <small>Task-relevant edges only</small>
+                    </li>
+                    <li class="method-step featured reveal">
+                        <div class="step-top"><span>03</span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 24h11l5-12 6 24 5-12h5M24 6v4M24 38v4"/></svg></div>
+                        <h3>Correct, don’t overwrite</h3>
+                        <p>The detached prior gates early edge features. Zero-initialized residual heads inject only the correction into the first two fused levels.</p>
+                        <small>Preserve the foundation</small>
+                    </li>
+                </ol>
+
+                <figure class="architecture-figure reveal">
+                    <div class="figure-heading">
+                        <div><span>Architecture</span><h3>Detached Edge-Residual Adaptation</h3></div>
+                        <button class="text-button" type="button" data-lightbox-src="assets/fig2-architecture.webp" data-lightbox-alt="Full DERA architecture diagram">View full size <span aria-hidden="true">↗</span></button>
+                    </div>
+                    <button class="figure-button clean" type="button" data-lightbox-src="assets/fig2-architecture.webp" data-lightbox-alt="DERA architecture with contextual and edge branches, detached boundary learning, and early residual injection">
+                        <img src="assets/fig2-architecture.webp" width="2800" height="1435" alt="DERA architecture showing parallel visual and edge pyramids, boundary pretraining, and residual fine-tuning" loading="lazy" decoding="async">
+                    </button>
+                </figure>
+            </div>
+        </section>
+
+        <section class="training section-pad" id="training" aria-labelledby="training-title">
+            <div class="shell">
+                <div class="section-heading reveal">
+                    <div class="section-kicker"><span>03</span> Training choreography</div>
+                    <h2 id="training-title">Three stages. Clear <em>responsibilities.</em></h2>
+                    <p>Each objective gets its own stage so semantic adaptation, contour learning, and residual correction do not compete.</p>
+                </div>
+
+                <ol class="training-track">
+                    <li class="training-card reveal">
+                        <div class="training-marker"><span>01</span><i></i></div>
+                        <div class="training-meta"><strong>Foundation adaptation</strong><span>15 epochs</span></div>
+                        <h3>Learn the X-ray domain</h3>
+                        <p>Adapt contextual and edge branches, cross-stream fusion, and detection modules with the detection objective.</p>
+                        <dl><div><dt>Trained</dt><dd>Visual + edge foundation</dd></div><div><dt>Frozen</dt><dd>Language encoder</dd></div></dl>
+                    </li>
+                    <li class="training-card reveal">
+                        <div class="training-marker"><span>02</span><i></i></div>
+                        <div class="training-meta"><strong>Boundary learning</strong><span>2 epochs</span></div>
+                        <h3>Learn what to retain</h3>
+                        <p>Freeze the foundation and train only the side heads and fusion layer using inner-contour supervision.</p>
+                        <dl><div><dt>Trained</dt><dd>26.1K parameters</dd></div><div><dt>Frozen</dt><dd>Foundation + residual heads</dd></div></dl>
+                    </li>
+                    <li class="training-card active reveal">
+                        <div class="training-marker"><span>03</span><i></i></div>
+                        <div class="training-meta"><strong>Residual tuning</strong><span>3 epochs</span></div>
+                        <h3>Learn only the correction</h3>
+                        <p>Freeze the foundation and boundary branch; optimize zero-initialized residual heads with detection loss.</p>
+                        <dl><div><dt>Trained</dt><dd>14.7K parameters</dd></div><div><dt>Frozen</dt><dd>Everything else</dd></div></dl>
+                    </li>
+                </ol>
+
+                <div class="inference-note reveal">
+                    <span class="inference-icon" aria-hidden="true">→</span>
+                    <div><strong>Inference stays simple</strong><p>X-ray image + category prompts only. No instance masks, contour targets, or external edge maps.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="results section-pad" id="results" aria-labelledby="results-title">
+            <div class="shell">
+                <div class="section-heading split-heading reveal">
+                    <div>
+                        <div class="section-kicker"><span>04</span> Evidence</div>
+                        <h2 id="results-title">Sharper localization across <em>three benchmarks.</em></h2>
+                    </div>
+                    <p>DERA consistently improves its Grounding DINO baseline under matched partitions, preprocessing, and category prompts.</p>
+                </div>
+
+                <div class="dataset-results">
+                    <article class="dataset-card reveal" style="--gain: 78%">
+                        <div class="dataset-top"><span>PIDray</span><small>12 categories</small></div>
+                        <div class="score-row"><span><small>Baseline</small>72.1</span><i>→</i><strong>75.2</strong></div>
+                        <div class="gain-track"><span></span></div>
+                        <p><strong>+3.1 AP</strong><span>AP<sub>50</sub> +3.4 · AP<sub>75</sub> +3.0</span></p>
+                    </article>
+                    <article class="dataset-card reveal" style="--gain: 48%">
+                        <div class="dataset-top"><span>CLCXray</span><small>12 categories</small></div>
+                        <div class="score-row"><span><small>Baseline</small>64.0</span><i>→</i><strong>65.6</strong></div>
+                        <div class="gain-track"><span></span></div>
+                        <p><strong>+1.6 AP</strong><span>AP<sub>50</sub> +2.1 · AP<sub>75</sub> +1.9</span></p>
+                    </article>
+                    <article class="dataset-card reveal" style="--gain: 62%">
+                        <div class="dataset-top"><span>STCray</span><small>21 categories</small></div>
+                        <div class="score-row"><span><small>Baseline</small>9.3</span><i>→</i><strong>11.7</strong></div>
+                        <div class="gain-track"><span></span></div>
+                        <p><strong>+2.4 AP</strong><span>AP<sub>50</sub> +7.4 · AP<sub>75</sub> +4.2</span></p>
+                    </article>
+                </div>
+
+                <div class="scale-story reveal">
+                    <div class="scale-lead"><small>Where DERA helps most</small><strong>+7.5 <span>AP<sub>S</sub></span></strong><p>Small-object improvement on CLCXray</p></div>
+                    <div class="scale-list">
+                        <div><span>PIDray</span><strong>+4.6</strong><i style="--bar: 61%"></i></div>
+                        <div><span>CLCXray</span><strong>+7.5</strong><i style="--bar: 100%"></i></div>
+                        <div><span>STCray</span><strong>+2.2</strong><i style="--bar: 29%"></i></div>
+                    </div>
+                    <p class="scale-note">Positive gains at every reported scale show that stronger small-object sensitivity does not come at the expense of large objects.</p>
+                </div>
+
+                <!-- <div class="result-note reveal">
+                    <span>Important context</span>
+                    <p>On STCray, several vision-only detectors retain slightly higher overall AP. DERA nevertheless achieves the strongest AP<sub>50</sub> and AP<sub>75</sub> in the reported comparison—19.5 and 14.5—showing stronger recovery at moderate and strict overlap thresholds.</p>
+                </div> -->
+
+                <details class="benchmark-details reveal">
+                    <summary>Selected benchmark values <span>Expand table</span></summary>
+                    <div class="table-scroll" tabindex="0" role="region" aria-label="Selected benchmark results; horizontally scrollable on small screens">
+                        <table>
+                            <caption>Grounding DINO, the dual-stream foundation, and DERA on three datasets.</caption>
+                            <thead><tr><th rowspan="2" scope="col">Method</th><th colspan="3" scope="colgroup">PIDray</th><th colspan="3" scope="colgroup">CLCXray</th><th colspan="3" scope="colgroup">STCray</th></tr><tr><th scope="col">AP</th><th scope="col">AP<sub>50</sub></th><th scope="col">AP<sub>75</sub></th><th scope="col">AP</th><th scope="col">AP<sub>50</sub></th><th scope="col">AP<sub>75</sub></th><th scope="col">AP</th><th scope="col">AP<sub>50</sub></th><th scope="col">AP<sub>75</sub></th></tr></thead>
+                            <tbody>
+                                <tr><th scope="row">Grounding DINO</th><td>72.1</td><td>82.8</td><td>77.6</td><td>64.0</td><td>75.2</td><td>72.5</td><td>9.3</td><td>12.1</td><td>10.3</td></tr>
+                                <tr><th scope="row">BEF-Swin</th><td>74.5</td><td>85.7</td><td>79.9</td><td>65.3</td><td>76.9</td><td>73.2</td><td>11.2</td><td>18.8</td><td>12.8</td></tr>
+                                <tr class="ours"><th scope="row">DERA</th><td>75.2</td><td>86.2</td><td>80.6</td><td>65.6</td><td>77.3</td><td>74.4</td><td>11.7</td><td>19.5</td><td>14.5</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </div>
+        </section>
+
+        <section class="efficiency" aria-labelledby="efficiency-title">
+            <div class="shell efficiency-grid">
+                <div class="efficiency-copy reveal">
+                    <div class="section-kicker light"><span>05</span> Efficient correction</div>
+                    <h2 id="efficiency-title">Change less.<br><em>Keep more.</em></h2>
+                    <p>The final stage tunes a tiny residual pathway. The complete inference model adds modest capacity while preserving the foundation representation.</p>
+                </div>
+                <div class="efficiency-stats">
+                    <article class="reveal"><strong>14.7K</strong><span>trainable parameters</span><small>Final residual-tuning stage only</small></article>
+                    <article class="reveal"><strong>+0.20%</strong><span>inference parameters</span><small>+0.354M over the baseline</small></article>
+                    <article class="reveal"><strong>+6.6%</strong><span>inference compute</span><small>+28.86 GMAC per image</small></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="ablations section-pad" id="ablations" aria-labelledby="ablations-title">
+            <div class="shell">
+                <div class="section-heading reveal">
+                    <div class="section-kicker"><span>06</span> What the ablations teach</div>
+                    <h2 id="ablations-title">The restraint is part of the <em>design.</em></h2>
+                </div>
+                <div class="ablation-grid">
+                    <article class="ablation-card reveal">
+                        <span class="ablation-number">01</span><h3>Learn the edge</h3>
+                        <p>Generic Sobel gradients amplify irrelevant transitions. The learned PiDiNet branch improves strict localization by <strong>+4.6 AP<sub>75</sub></strong> over Sobel.</p>
+                        <div class="mini-compare"><span><i style="--v: 75.3%"></i>Sobel <b>75.3</b></span><span class="active"><i style="--v: 79.9%"></i>PiDiNet <b>79.9</b></span></div>
+                    </article>
+                    <article class="ablation-card reveal">
+                        <span class="ablation-number">02</span><h3>Keep it shallow</h3>
+                        <p>The two-level pathway is both strongest and smallest. Deeper injection adds capacity while slightly reducing localization accuracy.</p>
+                        <p class="depth-label">Residual-tuning parameters</p>
+                        <div class="depth-dots" aria-label="Two levels: 14.7K residual-tuning parameters; three: 61.2K; four: 154.1K"><span class="active">P0–P1<small>14.7K</small></span><span>P0–P2<small>61.2K</small></span><span>P0–P3<small>154.1K</small></span></div>
+                    </article>
+                    <article class="ablation-card reveal">
+                        <span class="ablation-number">03</span><h3>Begin at zero</h3>
+                        <p>Zero initialization preserves the detector before tuning and improves strict localization by <strong>+0.5 AP<sub>75</sub></strong> over standard initialization.</p>
+                        <div class="zero-line"><span>R</span><i></i><strong>0</strong><i></i><span>useful correction</span></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="qualitative section-pad" id="qualitative" aria-labelledby="qualitative-title">
+            <div class="shell">
+                <div class="section-heading split-heading reveal">
+                    <div>
+                        <div class="section-kicker"><span>07</span> Qualitative microscope</div>
+                        <h2 id="qualitative-title">See where the correction <em>lands.</em></h2>
+                    </div>
+                    <!-- <p>Eight examples across four panels trace the complete path from baseline error to boundary prior, residual response, and final DERA prediction.</p> -->
+                </div>
+
+                <div class="gallery reveal" id="qualitative-gallery" role="region" tabindex="0" aria-roledescription="carousel" aria-label="DERA qualitative results">
+                    <div class="gallery-toolbar">
+                        <div><span id="gallery-title">Qualitative panel 1</span><small id="gallery-count" aria-live="polite">1 of 4</small></div>
+                        <div class="gallery-actions">
+                            <button type="button" id="gallery-prev" aria-label="Previous qualitative panel">←</button>
+                            <button type="button" id="gallery-next" aria-label="Next qualitative panel">→</button>
+                        </div>
+                    </div>
+                    <figure class="gallery-stage" id="gallery-panel" role="tabpanel" aria-label="Selected qualitative result panel">
+                        <button class="figure-button clean" id="gallery-open" type="button" aria-label="Open qualitative panel 1 full size">
+                            <img id="gallery-image" src="assets/qual-1.webp" width="2800" height="2000" alt="Qualitative panel 1 comparing input, baseline, boundary priors, residual predictions, DERA results, and multiscale edge features" loading="lazy" decoding="async">
+                        </button>
+                    </figure>
+                    <div class="gallery-tabs" role="tablist" aria-label="Choose qualitative panel">
+                        <button type="button" role="tab" aria-selected="true" data-gallery-index="0"><span>01</span>Cases 1–2</button>
+                        <button type="button" role="tab" aria-selected="false" data-gallery-index="1" tabindex="-1"><span>02</span>Cases 3–4</button>
+                        <button type="button" role="tab" aria-selected="false" data-gallery-index="2" tabindex="-1"><span>03</span>Cases 5–6</button>
+                        <button type="button" role="tab" aria-selected="false" data-gallery-index="3" tabindex="-1"><span>04</span>Cases 7–8</button>
+                    </div>
+                </div>
+                <noscript>
+                    <div class="noscript-gallery">
+                        <p>Interactive controls require JavaScript. All four qualitative panels remain available:</p>
+                        <a href="assets/qual-1.webp">Panel 1</a>
+                        <a href="assets/qual-2.webp">Panel 2</a>
+                        <a href="assets/qual-3.webp">Panel 3</a>
+                        <a href="assets/qual-4.webp">Panel 4</a>
+                    </div>
+                </noscript>
+            </div>
+        </section>
+
+        <section class="limitations section-pad" id="limitations" aria-labelledby="limitations-title">
+            <div class="shell limitations-grid">
+                <div class="limitations-copy reveal">
+                    <div class="section-kicker"><span>08</span> Honest boundaries</div>
+                    <h2 id="limitations-title">What boundary guidance does <em>not</em> solve.</h2>
+                    <p>DERA improves structural evidence, but it does not explicitly enforce instance separation or query consistency.</p>
+                    <ul>
+                        <li><span>01</span><div><strong>Instance merging</strong><p>Closely packed objects can merge into a single prediction.</p></div></li>
+                        <li><span>02</span><div><strong>Partial localization</strong><p>Recovered items may remain insufficiently localized at strict IoU thresholds.</p></div></li>
+                        <li><span>03</span><div><strong>Duplicate predictions</strong><p>Multiple queries can still respond to the same structure.</p></div></li>
+                    </ul>
+                </div>
+                <figure class="failure-figure reveal">
+                    <div class="offset-frame orange" aria-hidden="true"></div>
+                    <button class="figure-button clean" type="button" data-lightbox-src="assets/fig5-failures.webp" data-lightbox-alt="DERA failure cases: instance merging, partial localization, and duplicate predictions">
+                        <img src="assets/fig5-failures.webp" width="2800" height="1417" alt="Representative DERA failure cases including merged instances, partial boxes, and duplicate detections" loading="lazy" decoding="async">
+                    </button>
+                </figure>
+            </div>
+        </section>
+
+        <section class="citation section-pad" id="citation" aria-labelledby="citation-title">
+            <div class="shell citation-panel reveal">
+                <div>
+                    <h2 id="citation-title">Citation</h2>
+                    <pre class="citation-code"><code>Coming Soon</code></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="shell footer-grid">
+            <div class="footer-brand"><img src="assets/lab-logo.jpg" width="200" height="200" alt="CVML-KU laboratory logo"><div><strong>DERA</strong><span>Detached Edge-Residual Adaptation</span></div></div>
+            <p>Under Review · 2026</p>
+            <a href="#top">Back to top ↑</a>
+        </div>
+    </footer>
+
+    <dialog class="lightbox" id="figure-lightbox" aria-label="Expanded project figure">
+        <div class="lightbox-bar">
+            <button type="button" id="lightbox-close" aria-label="Close expanded figure">Close <span aria-hidden="true">×</span></button>
+        </div>
+        <div class="lightbox-canvas"><img id="lightbox-image" src="assets/fig1-motivation.webp" alt=""></div>
+    </dialog>
+</body>
+</html>
