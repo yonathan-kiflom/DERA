@@ -1,4 +1,24 @@
-# DERA
+<h1>
+  <strong>DERA</strong>: Detached Edge-Residual Adaptation for Prohibited item Detection
+</h1>
+
+---
+
+<p align="center">
+  <a href="https://scholar.google.com/citations?user=1NgtYpwAAAAJ&amp;hl=en">Yonathan Michael</a><sup>1</sup>,
+  <a href="https://scholar.google.com/citations?user=dLQ1jLkAAAAJ&amp;hl=en">Mohamad Alansari</a><sup>1</sup>,
+  <a href="https://scholar.google.com/citations?user=ylX5MEAAAAAJ&amp;hl=en&amp;oi=ao">Mohammed Bennamoun</a><sup>2</sup>,
+  <a href="https://scholar.google.com/citations?user=j5K7HPoAAAAJ&amp;hl=en&amp;oi=ao">Dwarikanath Mahapatra</a><sup>1</sup>,
+  <a href="https://scholar.google.com/citations?user=jenl24IAAAAJ&amp;hl=en&amp;oi=ao">Andreas Henschel</a><sup>1</sup>,
+  <a href="https://scholar.google.com/citations?user=G_2Xpm0AAAAJ&amp;hl=en">Naoufel Werghi</a><sup>1</sup>
+</p>
+
+<p align="center">
+  <sup>1</sup>Khalifa University, Abu Dhabi, UAE<br>
+  <sup>2</sup>University of Western Australia, Perth, Australia
+</p>
+
+---
 
 DERA is an edge-aware, text-conditioned detector for prohibited-item
 localization in X-ray images. It extends Grounding DINO with a parallel
@@ -8,25 +28,7 @@ inference needs an image and category prompts.
 
 ## Pipeline
 
-```text
-Image
-├─ Swin stages S0...S3 ───────────────────────┐
-└─ PiDiNet maps P0...P3 -> stage projections ─┴─> four-level fusion ─┐
-   └─ P0,P1 -> boundary -> gated residuals -> add at stages 0,1 ─────┤
-Prompts -> frozen BERT ───────────────────────────────────────────────┤
-                                                                     v
-                                                        Grounding DINO -> boxes
-```
-
-Training is intentionally split into three checkpoint-linked stages:
-
-1. **Foundation:** adapt the detector and four-level PiDiNet--Swin fusion.
-2. **Boundary:** freeze the foundation and learn two side heads plus their
-   fusion layer from instance-mask contours.
-3. **Residual:** freeze the foundation and boundary head, then learn two
-   zero-initialized edge-gated residual projections with the detection loss.
-
-See [Project.md](Project.md) for the operators and trainable components.
+![DERA model overview](assets/Architecture.jpg)
 
 ## Install
 

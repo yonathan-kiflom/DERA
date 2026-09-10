@@ -2,15 +2,37 @@ cff-version: 1.2.0
 message: >-
   If you use DERA, cite this software, the associated paper when available,
   and the upstream methods and dataset listed in the documentation.
-title: DERA
+title: "DERA: Detached Edge-Residual Adaptation for Prohibited item Detection"
 type: software
 version: 0.1.0
 authors:
-  - name: DERA contributors
+  - given-names: Yonathan
+    family-names: Michael
+    affiliation: Khalifa University, Abu Dhabi, UAE
+    website: "https://scholar.google.com/citations?user=1NgtYpwAAAAJ&hl=en"
+  - given-names: Mohamad
+    family-names: Alansari
+    affiliation: Khalifa University, Abu Dhabi, UAE
+    website: "https://scholar.google.com/citations?user=dLQ1jLkAAAAJ&hl=en"
+  - given-names: Mohammed
+    family-names: Bennamoun
+    affiliation: University of Western Australia, Perth, Australia
+    website: "https://scholar.google.com/citations?user=ylX5MEAAAAAJ&hl=en&oi=ao"
+  - given-names: Dwarikanath
+    family-names: Mahapatra
+    affiliation: Khalifa University, Abu Dhabi, UAE
+    website: "https://scholar.google.com/citations?user=j5K7HPoAAAAJ&hl=en&oi=ao"
+  - given-names: Andreas
+    family-names: Henschel
+    affiliation: Khalifa University, Abu Dhabi, UAE
+    website: "https://scholar.google.com/citations?user=jenl24IAAAAJ&hl=en&oi=ao"
+  - given-names: Naoufel
+    family-names: Werghi
+    affiliation: Khalifa University, Abu Dhabi, UAE
+    website: "https://scholar.google.com/citations?user=G_2Xpm0AAAAJ&hl=en"
 license: Apache-2.0
 keywords:
   - X-ray object detection
   - edge-aware detection
   - Grounding DINO
   - PiDiNet
-
