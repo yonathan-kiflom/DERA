@@ -21,7 +21,7 @@
 <p align="center">
   <span title="Paper link coming soon">📄 Paper (Coming soon)</span>
   &nbsp;|&nbsp;
-  <a href="https://yonathan-kiflom.github.io/DERA/" title="Project page deployment pending">🌐 Project Page (Coming soon)</a>
+  <a href="https://yonathan-kiflom.github.io/DERA/page" title="Project page">🌐 Project Page</a>
   &nbsp;|&nbsp;
   <a href="https://kuacae-my.sharepoint.com/:f:/g/personal/100053679_ku_ac_ae/IgDrLHr0fF4qQbXOknS8al-cAcCLGkqZoM1esbcxdmI_Rzw?e=9tQfio">📥 Weights</a>
 </p>
