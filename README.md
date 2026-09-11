@@ -18,13 +18,20 @@
   <sup>2</sup>University of Western Australia, Perth, Australia
 </p>
 
+<p align="center">
+  <span title="Paper link coming soon">📄 Paper (Coming soon)</span>
+  &nbsp;|&nbsp;
+  <a href="https://yonathan-kiflom.github.io/DERA/" title="Project page deployment pending">🌐 Project Page (Coming soon)</a>
+  &nbsp;|&nbsp;
+  <a href="https://kuacae-my.sharepoint.com/:f:/g/personal/100053679_ku_ac_ae/IgDrLHr0fF4qQbXOknS8al-cAcCLGkqZoM1esbcxdmI_Rzw?e=9tQfio">📥 Weights</a>
+</p>
+
 ---
 
 DERA is an edge-aware, text-conditioned detector for prohibited-item
 localization in X-ray images. It extends Grounding DINO with a parallel
-pixel-difference stream, a mask-supervised boundary prior, and two lightweight
-residual adapters. Masks are used only while learning the boundary head;
-inference needs an image and category prompts.
+pixel-difference stream, a mask-derived boundary prior, and two lightweight
+residual adapters.
 
 ## Pipeline
 
@@ -32,9 +39,7 @@ inference needs an image and category prompts.
 
 ## Install
 
-Linux, an NVIDIA GPU, and CUDA 12.1 are the reference setup. The pinned clean
-recipe targets the MMDetection-supported `mmcv==2.1.0`; no compatibility
-checks are disabled. Validate the recipe on a fresh machine before release.
+Python 3.9, CUDA 12.1 and `mmcv==2.1.0` are the reference setup.
 
 ```bash
 conda env create -f environment/environment.yml
@@ -43,7 +48,7 @@ pip install -e .
 dera doctor
 ```
 
-The Conda and Docker recipes, including offline setup, are in
+The Conda and Docker recipes are in
 [docs/REPRODUCE.md](docs/REPRODUCE.md).
 
 ## Prepare data
@@ -94,8 +99,7 @@ full stage and checkpoint contract is in
 
 ## Evaluate and infer
 
-This code-only repository does not bundle model weights. Train the pipeline or
-download a release checkpoint whose checksum is recorded in the manifest.
+To reproduce our results:
 
 ```bash
 dera evaluate --dataset pidray --data-root data/PIDray \
@@ -106,15 +110,13 @@ dera infer --dataset pidray --checkpoint checkpoints/dera_final.pth \
   --out-dir outputs
 ```
 
-Released weight metadata and checksums belong in
-[`checkpoints/manifest.json`](checkpoints/manifest.json); model files are never
-committed to Git.
+
 
 ## Repository map
 
 ```text
-dera/           DERA-owned model and training code
-third_party/    isolated, attributed PiDiNet/PDC-derived code
+dera/           DERA model and training code
+third_party/    attributed PiDiNet/PDC-derived code
 configs/        shared recipes plus thin dataset overlays
 dataset_specs/  dataset layout and category contracts
 tests/          unit, phase-isolation, and smoke tests
@@ -131,18 +133,13 @@ obtain each dataset from its official source and comply with its terms.
 DERA is intended for reproducible research and method development. It is not a
 certified screening system and must not be the sole basis for safety-critical
 decisions. Results depend on scanner characteristics, prompts, annotation
-policy, dataset bias, and domain shift; small, occluded, overlapping, or weakly
+policy, dataset bias, and domain shift and small, occluded, overlapping, or weakly
 visible objects may be missed, and confidence scores may be miscalibrated.
-Report the exact dataset split, prompt order, checkpoint checksum, resolved
-configuration, software environment, seed, and metrics as described in
-[docs/REPRODUCE.md](docs/REPRODUCE.md).
 
 ## License and citation
 
-DERA-authored code is available under Apache-2.0. Third-party components keep
-their own terms; PiDiNet's upstream license contains an explicit research-only
-sentence, so read [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md) before
-redistribution or commercial use.
+DERA code is available under Apache-2.0. Third-party components keep
+their own terms; PiDiNet's license is included in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
 
-Citation metadata is provided in [CITATION.cff](CITATION.cff). Please also cite
-Grounding DINO, Swin Transformer, PiDiNet, MMDetection, and the dataset used.
+## Citation
+Please also cite Grounding DINO, Swin Transformer, PiDiNet, MMDetection, and the datasets used.
