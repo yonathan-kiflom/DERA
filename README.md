@@ -19,7 +19,7 @@
 </p>
 
 <p align="center">
-  <span title="Paper link coming soon">📄 Paper (Coming soon)</span>
+  <a href="https://arxiv.org/abs/2609.12411">📄 Paper</a>
   &nbsp;|&nbsp;
   <a href="https://yonathan-kiflom.github.io/DERA/page" title="Project page">🌐 Project Page</a>
   &nbsp;|&nbsp;
@@ -142,4 +142,20 @@ DERA code is available under Apache-2.0. Third-party components keep
 their own terms; PiDiNet's license is included in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
 
 ## Citation
+
+If you use DERA in your research, please cite our paper:
+
+```bibtex
+@misc{michael2026deradetachededgeresidualadaptation,
+  title={DERA: Detached Edge-Residual Adaptation for Prohibited item Detection},
+  author={Yonathan Michael and Mohamad Alansari and Mohammed Bennamoun and
+          Dwarikanath Mahapatra and Andreas Henschel and Naoufel Werghi},
+  year={2026},
+  eprint={2609.12411},
+  archivePrefix={arXiv},
+  primaryClass={cs.CV},
+  url={https://arxiv.org/abs/2609.12411},
+}
+```
+
 Please also cite Grounding DINO, Swin Transformer, PiDiNet, MMDetection, and the datasets used.

@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: >-
-  If you use DERA, cite this software, the associated paper when available,
-  and the upstream methods and dataset listed in the documentation.
+  If you use DERA, please cite the paper in preferred-citation and the
+  upstream methods and datasets listed in the documentation.
 title: "DERA: Detached Edge-Residual Adaptation for Prohibited item Detection"
 type: software
 version: 0.1.0
@@ -30,6 +30,28 @@ authors:
     family-names: Werghi
     affiliation: Khalifa University, Abu Dhabi, UAE
     website: "https://scholar.google.com/citations?user=G_2Xpm0AAAAJ&hl=en"
+preferred-citation:
+  type: generic
+  status: preprint
+  title: "DERA: Detached Edge-Residual Adaptation for Prohibited item Detection"
+  authors:
+    - given-names: Yonathan
+      family-names: Michael
+    - given-names: Mohamad
+      family-names: Alansari
+    - given-names: Mohammed
+      family-names: Bennamoun
+    - given-names: Dwarikanath
+      family-names: Mahapatra
+    - given-names: Andreas
+      family-names: Henschel
+    - given-names: Naoufel
+      family-names: Werghi
+  year: 2026
+  url: "https://arxiv.org/abs/2609.12411"
+  identifiers:
+    - type: other
+      value: "arXiv:2609.12411"
 license: Apache-2.0
 keywords:
   - X-ray object detection
